@@ -2,16 +2,53 @@
 
 <html>
     <head>
-        <p>Surely The World Will Not End </p>
+        <div style="display: flex; justify-content: center;">
+            <h1 style="font-family: monospace; justify-content: center;">Surely The World Will Not End</h1>
+        </div>
     </head>
     <body>
-        <p>as long as we dump money into companies that save .</p>
-        
-
+        <div style="display: flex; justify-content: center;">
+            <p style="font-family: monospace; justify-content: center; text-align: center;">as long as we make a company that saves it!<br>Click the button below to automatically funnel $350,000 from your bank account to 我想回家 Inc. <br>We're a new company that is going to save the world, and therefore your family! Trust me bro!</p>
+        </div>
     </body>
+    <div style="display: flex; justify-content: center; flex-direction: column; padding-right: 30vw; padding-left: 30vw;">
+        <button onclick="addDaysToCountdown()">Invest in Your Future!</button>
+        <p id="countdown" style="font-family: monospace; justify-content: center; text-align: center;"></p>
+    </div>
 
-    <button id="startCountdown">The World is Gonna End if You Click This</button>
-    <div id="countdownTimer"></div>
-    <script src="countdown.js"></script>
+<script>
+    // Initial end date for the countdown
+    var countDownDate = new Date().getTime() + (10 * 24 * 60 * 60 * 1000); // 10 days from now
     
+    // Function to update the countdown
+    function updateCountdown() {
+        var now = new Date().getTime();
+        var distance = countDownDate - now;
+        
+        // Time calculations for days, hours, minutes and seconds
+        var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+        
+        // Display the result
+        document.getElementById("countdown").innerHTML = days + "d " + hours + "h "
+        + minutes + "m " + seconds + "s ";
+        
+        // If the countdown is over, display a message
+        if (distance < 0) {
+            clearInterval(window.countdownInterval);
+            document.getElementById("countdown").innerHTML = "EXPIRED";
+        }
+    }
+    
+    // Function to add 10 days to the countdown
+    function addDaysToCountdown() {
+        countDownDate += 10 * 24 * 60 * 60 * 1000; // Add 10 days in milliseconds
+        clearInterval(window.countdownInterval); // Clear the existing interval
+        window.countdownInterval = setInterval(updateCountdown, 1000); // Start a new interval
+    }
+    window.countdownInterval = setInterval(updateCountdown, 1000);
+    </script>
 </html>
+
